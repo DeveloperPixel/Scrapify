@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Details</title>
+    <link rel="shortcut icon" href="{% static 'images/image.png' %}" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Belanosima&family=Caprasimo&family=League+Spartan:wght@300&family=Lobster&family=Roboto:wght@300&family=Varela+Round&display=swap"
+            rel="stylesheet"
+    />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+      /* Hide the spinner buttons in webkit browsers (Chrome, Safari) */
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Hide the spinner buttons in Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+
+
+
+
+
+
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col font-sans min-h-screen">
+<header
+        class="bg-gray-800 text-white p-3 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between"
+>
+    <div class="flex items-center" title="Scrapify" onclick="location.href='{% url 'base' %}'">
+        <img
+                alt="Scrapify logo"
+                style="filter: invert(1)"
+                height="40"
+                src="{% static 'images/logo_bg.png' %}"
+                width="40"
+        />
+        <span
+                class="ml-0 sm:ml-1 md:ml-2 mt-1"
+                style="
+            font-family: 'Varela Round', serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.5rem;
+          "
+        ><img src="{% static 'images/logo.svg' %}" alt="Scrapify" class="sm:h-29"
+        /></span>
+    </div>
+
+    <div class="flex items-center">
+        <a class="hidden sm:block">Hello, {% if 'username' in request.session %} {{ request.session.username }} {%else%}
+            sign in {% endif %}</a>
+        <a class="flex ml-3 items-center" href="{% url 'profile' %}"><i class="fas fa-user-circle text-2xl"  title="profile"></i></a>
+        <span class="ml-2 h-full">|</span>
+        {% if 'uid' not in request.session %}
+        <a class="sm:ml-2 rounded-md px-2 py-1 hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+           href="{% url 'dual' %}">login</a>
+        {% else %}
+        <a class="sm:ml-2 rounded-md px-2 py-1 hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+           href="{% url 'log' %}">logout</a>
+        {% endif %}
+    </div>
+</header>
+
+<nav class="bg-gray-700 text-white p-2">
+      <!-- Hamburger Icon for Small Screens -->
+      <div class="flex justify-between items-center sm:hidden">
+        <button id="hamburger-btn" class="text-white text-3xl">
+          &#9776;
+          <!-- Hamburger Icon -->
+        </button>
+      </div>
+
+      <!-- Side Panel (hidden by default) -->
+      <div
+        id="side-panel"
+        class="fixed left-0 top-0 w-2/3 h-full bg-gray-800 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+      >
+        <div class="flex justify-end p-4">
+          <button id="close-panel" class="text-white text-3xl">&#10006;</button>
+        </div>
+        <ul class="flex flex-col items-center h-full">
+          <li>
+            <a
+              href="{% url 'home' %}"
+              class="px-2 py-1 mt-2 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Features</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Tutorials</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Contact Us</a
+            >
+          </li>
+          <li>
+            <a
+              href="/accounts/profile"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              ><i class="fas fa-shopping-cart mr-2"></i>Your Cart</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Navigation for Larger Screens -->
+      <ul
+        class="hidden sm:flex flex-wrap items-center justify-between h-auto overflow-x-auto mx-auto w-full sm:w-2/3 md:w-7/10 lg:w-1/2 xl:w-1/2"
+      >
+        <li>
+          <a
+            href="/scraper/"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Tutorials</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Contact Us</a
+          >
+        </li>
+        <li class="flex flex-row">
+          <a
+            href="/accounts/profile"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            ><i class="fas fa-shopping-cart mr-2"></i>Your Cart</a>
+
+        </li>
+      </ul>
+    </nav>
+
+<main class="max-w-6xl flex-grow mx-auto p-8">
+    <div class="flex flex-col sm:flex-row">
+        <div class="flex justify-around sm:w-1/3 md:w-7/10 lg:w-1/3 xl:w-1/3">
+            <div class="flex flex-col items-center">
+                <img
+                        alt="{{ title }}"
+                        class="w-full"
+                        height="300"
+                        src="{{ image }}"
+                        width="300"
+                />
+            </div>
+        </div>
+
+        <div class="w-full lg:w-2/3 sm:pl-4 mt-4 sm:mt-0">
+            <h1 class="text-2xl font-bold">
+                {{ title }}
+            </h1>
+            <div class="flex items-center mt-2">
+                <span class="text-yellow-500"><i class="fas fa-star"></i>{{ star }}</span>
+                <span class="ml-2 text-blue-500">|</span>
+                <span class="ml-2 text-blue-500">{{ rating }}</span>
+                <span class="ml-2 text-blue-500">|</span>
+                <span class="ml-2 text-blue-500"><a href="{{ url }}" target="_blank"> Search this page </a></span>
+            </div>
+            <hr class="mt-1">
+            <!-- price -->
+            <div class="mt-1">
+                <span class="text-red-500 text-2xl font-bold">-{{ per }}%</span>
+                <span class="text-2xl font-bold">₹{{ price }}</span><br>
+                <span class="line-through text-gray-500 text-sm opacity-70">M.R.P.: {{ old_MRP }}</span>
+            </div>
+
+
+            <!-- form -->
+            <div class="max-auto sm:mt-1">
+                <form class="my-2" method="POST" action="/scraper/push_data/">
+                    {% csrf_token %}
+                    <label
+                            for="price"
+                            class="block text-gray-700 text-sm font-semibold mb-2"
+                    >Enter the price you're waiting for:</label
+                    >
+                    <div class="flex flex-col sm:flex-row sm:space-x-2" style="max-width: 230px;">
+                        <input
+                                type="number"
+                                id="price"
+                                name="threshold"
+                                class="flex px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your desired price"
+                                required
+                        />
+
+                    </div>
+                    <div class="flex flex-row mt-2">
+                        <button type="submit"
+                                class="py-2 bg-orange-500 w-fit text-white rounded hover:bg-orange-700 inline-flex flex-wrap items-center justify-center flex-shrink-0 text-center rounded-lg cursor-pointer px-4 font-semibold shadow-md transition-transform duration-200 w-fit"
+                                >Add To Shopping List
+                        </button>
+                        <button onclick="goBack()"
+                                class="flex items-center px-4 ml-2 rounded-lg bg-white text-[rgba(0,0,0,.6)] border border-[rgba(0,0,0,.3)] text-center cursor-pointer">
+                            <ion-icon name="arrow-back" class="mr-2"></ion-icon>
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+
+
+                </form>
+                <hr class="mt-2">
+            </div>
+
+        </div>
+    </div>
+
+</main>
+<footer class="bg-gray-700 text-white text-center max-w-auto h-auto ">
+    <p>&copy; 2025 Scrapify. All rights reserved.</p>
+
+</footer>
+
+<!-- JavaScript for Hamburger Menu -->
+<script>
+      // Get the elements
+      const hamburgerBtn = document.getElementById("hamburger-btn");
+      const sidePanel = document.getElementById("side-panel");
+      const closePanelBtn = document.getElementById("close-panel");
+
+      // Toggle the side panel when the hamburger button is clicked
+      hamburgerBtn.addEventListener("click", function () {
+        sidePanel.classList.toggle("-translate-x-full");
+      });
+
+      // Close the side panel when the close button is clicked
+      closePanelBtn.addEventListener("click", function () {
+        sidePanel.classList.toggle("-translate-x-full");
+      });
+
+
+
+
+
+</script>
+<script>
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = '{% url 'home'%}';
+  }
+}
+
+
+</script>
+
+</body>
+</html>

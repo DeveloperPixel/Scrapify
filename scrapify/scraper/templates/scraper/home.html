@@ -1,0 +1,252 @@
+{% if message %}
+<script>
+    alert('{{message}}');
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Scraper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="{% static 'images/image.png' %}" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            text-align: center;
+            height:250px;
+        }
+        input[type="text"] {
+            width: 80%;
+            border:2px solid red;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #results {
+            color:black;
+        }
+        #loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<header
+      class="bg-gray-800 text-white p-3 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between"
+    >
+      <div class="flex items-center" title="Scrapify" onclick="location.href='{% url 'base' %}'">
+        <img
+          alt="Scrapify logo"
+          style="filter: invert(1)"
+          height="40"
+          src="{% static 'images/logo_bg.png' %}"
+          width="40"
+        />
+        <span
+          class="ml-0 sm:ml-1 md:ml-2 mt-1"
+          style="
+            font-family: 'Varela Round', serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.5rem;
+          "
+          ><img src="{% static 'images/logo.svg' %}" alt="Scrapify" class="sm:h-29"
+        /></span>
+      </div>
+
+      <div class="flex items-center">
+        <a class="hidden sm:block">Hello, {% if 'username' in request.session %} {{ request.session.username }} {% else %} sign in {% endif %}</a>
+         <a class="flex ml-3 items-center" href="{% url 'profile' %}"><i class="fas fa-user-circle text-2xl"  title="profile"></i></a>
+        <span class="ml-2 h-full">|</span>
+        {% if 'uid' not in request.session %}
+          <a class="sm:ml-2 rounded-md px-2 py-1 sm:bg-[rgba(255,255,255,0.28)] hover:bg-[rgba(255,255,255,0.10)]" href="{% url 'dual' %}">login</a>
+          {% else %}
+          <a class="sm:ml-2 rounded-md px-2 py-1 sm:bg-[rgba(255,255,255,0.28)] hover:bg-[rgba(255,255,255,0.10)]" href="{% url 'log' %}">logout</a>
+          {% endif %}
+      </div>
+    </header>
+
+   <nav class="bg-gray-700 text-white p-2">
+      <!-- Hamburger Icon for Small Screens -->
+      <div class="flex justify-between items-center sm:hidden">
+        <button id="hamburger-btn" class="text-white text-3xl">
+          &#9776;
+          <!-- Hamburger Icon -->
+        </button>
+      </div>
+
+      <!-- Side Panel (hidden by default) -->
+      <div
+        id="side-panel"
+        class="fixed left-0 top-0 w-2/3 h-full bg-gray-800 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+      >
+        <div class="flex justify-end p-4">
+          <button id="close-panel" class="text-white text-3xl">&#10006;</button>
+        </div>
+        <ul class="flex flex-col items-center h-full">
+          <li>
+            <a
+              href="{% url 'home' %}"
+              class="px-2 py-1 mt-2 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Features</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Tutorials</a
+            >
+          </li>
+          <li>
+            <a
+              href="/wip"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              >Contact Us</a
+            >
+          </li>
+          <li>
+            <a
+              href="/accounts/profile"
+              class="px-2 py-1 mb-2 block hover:bg-blue-500 hover:text-white"
+              ><i class="fas fa-shopping-cart mr-2"></i>Your Cart</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Navigation for Larger Screens -->
+      <ul
+        class="hidden sm:flex flex-wrap items-center justify-between h-auto overflow-x-auto mx-auto w-full sm:w-2/3 md:w-7/10 lg:w-1/2 xl:w-1/2"
+      >
+        <li>
+          <a
+            href="/scraper/"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Tutorials</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wip"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            >Contact Us</a
+          >
+        </li>
+        <li class="flex flex-row">
+          <a
+            href="/accounts/profile"
+            class="border-b-2 rounded-sm px-2 py-1 block hover:bg-[rgba(255,255,255,0.18)] hover:text-white"
+            ><i class="fas fa-shopping-cart mr-2"></i>Your Cart</a>
+
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container m-auto mt-4">
+        <div id="loader"></div>
+        <form  id="scraperForm" method="POST" action="{% url 'scrape'%}">
+            {% csrf_token %}
+            <input type="text" name="url" placeholder="Enter Amazon product URL" required>
+            <button class="ml-2 px-4 py-2 hover:bg-orange-500 hover:text-white border-2 border-orange-500 rounded bg-white text-orange-500 text-base" type="submit">Scrape</button>
+        </form>
+        <div id="results">
+            {% if title and price %}
+                <h3>Product Title:</h3>
+                <p>{{ title }}</p>
+                <h3>Product Price:</h3>
+                <p>{{ price }}</p>
+            {% elif title or price %}
+                <p><strong>Message:</strong> Partial data available. Ensure the URL is correct.</p>
+            {% endif %}
+        </div>
+
+        <div style="color:red;">
+            {% if error %}
+            <p>{{error}}</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+<script>
+      // Get the elements
+      const hamburgerBtn = document.getElementById("hamburger-btn");
+      const sidePanel = document.getElementById("side-panel");
+      const closePanelBtn = document.getElementById("close-panel");
+      const loader = document.getElementById('loader');
+      const form = document.getElementById('scraperForm');
+      loader.style.display = 'none';
+
+       form.addEventListener('submit', () => {
+            loader.style.display = 'block'; // Show the loader
+        });
+
+
+      // Toggle the side panel when the hamburger button is clicked
+      hamburgerBtn.addEventListener("click", function () {
+        sidePanel.classList.toggle("-translate-x-full");
+      });
+
+      // Close the side panel when the close button is clicked
+      closePanelBtn.addEventListener("click", function () {
+        sidePanel.classList.toggle("-translate-x-full");
+      });
+    </script>
+</body>
+</html>

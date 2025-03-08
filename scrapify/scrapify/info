@@ -1,0 +1,37 @@
+apiKey: "AIzaSyDPoKN5I9PgF1mzTZgzvdCkngs8kBFTSpM",
+  authDomain: "scrapify-6e6a4.firebaseapp.com",
+  projectId: "scrapify-6e6a4",
+  storageBucket: "scrapify-6e6a4.firebasestorage.app",
+  messagingSenderId: "403405000720",
+  appId: "1:403405000720:web:483e8e0b01be253a88ba95"
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPoKN5I9PgF1mzTZgzvdCkngs8kBFTSpM",
+    authDomain: "scrapify-6e6a4.firebaseapp.com",
+    projectId: "scrapify-6e6a4",
+    storageBucket: "scrapify-6e6a4.firebasestorage.app",
+    messagingSenderId: "403405000720",
+    appId: "1:403405000720:web:483e8e0b01be253a88ba95"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>

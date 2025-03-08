@@ -1,0 +1,16 @@
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:django.utils.autoreload:C:\Users\MS\PycharmProjects\scrapify-PBL\scrapify\scraper\views.py changed, reloading.
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:django.utils.autoreload:C:\Users\MS\PycharmProjects\scrapify-PBL\scrapify\scraper\views.py changed, reloading.
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:django.utils.autoreload:C:\Users\MS\PycharmProjects\scrapify-PBL\scrapify\scraper\views.py changed, reloading.
+INFO:httpx:HTTP Request: GET https://www.amazon.in/dp/B0D3R1JQ7D/ref=sspa_dk_detail_3?pd_rd_i=B0D3R1JQ7D&pd_rd_w=BzOoS&content-id=amzn1.sym.413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_p=413ef885-ae1b-472f-afa4-d683cda6ad0d&pf_rd_r=948P6ZM91A6TDVHWT6KJ&pd_rd_wg=7ZbpR&pd_rd_r=43f7f048-2dd6-46de-97a8-86b618f50a8c&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1 "HTTP/1.1 200 OK"
+INFO:root:Scraped Data: {'title': 'Title Not Found', 'price': 'Price Not Found'}
+INFO:django.utils.autoreload:C:\Users\MS\PycharmProjects\scrapify-PBL\scrapify\scraper\views.py changed, reloading.

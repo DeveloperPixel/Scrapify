@@ -1,0 +1,191 @@
+{% if messg %}
+<script>
+    alert('{{messg}}');
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Sign up</title>
+    <link rel="shortcut icon" href="{% static 'images/image.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/myform.css' %}">
+</head>
+<body>
+    <div class="container">
+      <div class="box signINform">
+        <form method="POST" action="/accounts/login/">
+            {% csrf_token %}
+          <h3>Login</h3>
+          <div class="element1 username">
+            <label for="username">Username</label>
+            <input type="email" id="username" name="username" required/>
+              <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <div class="element2 password">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required/>
+            <ion-icon name="eye" id="icon1"></ion-icon>
+            <ion-icon name="key-outline" id="icon2" style="visibility: hidden;"></ion-icon>
+          </div>
+          <div class="element3 forgot">
+            <label for="remember"><input type="checkbox" name="remember" id="remember"> Remember me</label>
+            <a href="{% url 'forgot_pass'%}">Forgot Password?
+            </a>
+          </div>
+
+          <div class="element4 submit">
+            <input type="submit" value="Login" />
+          </div>
+          <div class="element5">
+            <p>Don't have an account? <a href="#" id="forgot" onclick="addSlideClass()">Register</a>
+              </p>
+          </div>
+<!--          <div class="login_options">-->
+<!--            <div class="other_login">Google</div>-->
+<!--            <div class="other_login">Facebook</div>-->
+<!--            <div class="other_login">Twitter</div>-->
+<!--            <div class="other_login">Linkedin</div>-->
+<!--          </div>-->
+        </form>
+      </div>
+
+      <div class="box signUPform">
+        <form method="POST" action="/accounts/signup/">
+           {% csrf_token %}
+          <h3>Register</h3>
+
+          <div class="user-up" >
+            <label for="username-up">Username</label>
+            <input type="text" id="username-up" name="username-up" /><ion-icon name="person-outline"></ion-icon>
+          </div>
+
+          <div class="email-up" >
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"/><ion-icon name="mail-unread-outline"></ion-icon>
+          </div>
+
+          <div class="pass-up">
+            <label for="password-up">Password</label>
+            <input type="password" id="password-up" name="password_up" />
+            <ion-icon name="eye" class="icon1" style="cursor:pointer;"></ion-icon>
+           <ion-icon name="key-outline" class="icon2" style="visibility: hidden;"></ion-icon>
+          </div>
+
+          <div class="con-pass-up">
+            <label for="con-password-up">Confirm Password</label>
+            <input type="password" id="con-password-up" name="conpass_up"/>
+            <ion-icon name="eye" class="icon1" style="cursor:pointer;"></ion-icon>
+           <ion-icon name="key-outline" class="icon2" style="visibility: hidden;"></ion-icon>
+          </div>
+
+
+           <div class="error_register" style="color: red;font-size: 10px;text-align:center;">{{error_register}}</div>
+
+
+          <div class="Register">
+            <input type="submit" value="Register" />
+          </div>
+
+
+          <div class="link">
+            <p>Already have an account? <a href="#" onclick="removeSlideClass()">Login</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+
+      function addSlideClass() {
+        var containers = document.querySelectorAll('.box');
+        containers.forEach(function(container) {
+          container.classList.add('slide');
+        });
+      }
+    {% if show_up %}
+        addSlideClass();
+    {% endif %}
+      function removeSlideClass() {
+        var containers = document.querySelectorAll('.box');
+        containers.forEach(function(container) {
+          container.classList.remove('slide');
+        });
+      }
+
+    </script>
+    <script>
+        document.getElementById("icon1").addEventListener("click", function () {
+        document.getElementById("password").type = "text";
+        document.getElementById("icon1").style.visibility = "hidden";
+        document.getElementById("icon2").style.visibility = "visible";
+        document.getElementById("icon1").style.zIndex = -1;
+        document.getElementById("icon2").style.zIndex = 1;
+        });
+
+        document.getElementById("icon2").addEventListener("click", function () {
+        document.getElementById("password").type = "password";
+        document.getElementById("icon2").style.visibility = "hidden";
+        document.getElementById("icon1").style.visibility = "visible";
+        document.getElementById("icon1").style.zIndex = 1;
+        document.getElementById("icon2").style.zIndex = -1;
+      });
+    </script>
+    <script>
+                    // Select all elements with class "icon1" and "icon2"
+            const icons1 = document.getElementsByClassName("icon1");
+            const icons2 = document.getElementsByClassName("icon2");
+
+            // Convert HTMLCollection to array and add event listeners to each "icon1"
+            Array.from(icons1).forEach((icon1) => {
+                icon1.addEventListener("click", function () {
+                    const parentDiv = icon1.parentElement; // Get parent div
+                    const input = parentDiv.querySelector("input[type='password']"); // Find input
+                    const icon2 = parentDiv.querySelector(".icon2"); // Find icon2
+
+                    if (input) {
+                        input.type = "text"; // Show password
+                    }
+
+                    if (icon1) {
+                        icon1.style.visibility = "hidden";
+                        icon1.style.zIndex = "-1";
+                    }
+                    if (icon2) {
+                        icon2.style.visibility = "visible";
+                        icon2.style.zIndex = "1";
+                    }
+                });
+            });
+
+            // Add event listeners to each "icon2" to reverse the changes
+            Array.from(icons2).forEach((icon2) => {
+                icon2.addEventListener("click", function () {
+                    const parentDiv = icon2.parentElement; // Get parent div
+                    const input = parentDiv.querySelector("input[type='text']"); // Find input
+                    const icon1 = parentDiv.querySelector(".icon1"); // Find icon1
+
+                    if (input) {
+                        input.type = "password"; // Hide password
+                    }
+
+                    if (icon2) {
+                        icon2.style.visibility = "hidden";
+                        icon2.style.zIndex = "-1";
+                    }
+                    if (icon1) {
+                        icon1.style.visibility = "visible";
+                        icon1.style.zIndex = "1";
+                    }
+                });
+            });
+
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
