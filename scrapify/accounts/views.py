@@ -10,13 +10,7 @@ from django.http import JsonResponse
 from firebase_admin import auth
 
 config = {
-    "apiKey": "AIzaSyDPoKN5I9PgF1mzTZgzvdCkngs8kBFTSpM",
-    "authDomain": "scrapify-6e6a4.firebaseapp.com",
-    "databaseURL": "https://scrapify-6e6a4-default-rtdb.firebaseio.com",
-    "projectId": "scrapify-6e6a4",
-    "storageBucket": "scrapify-6e6a4.firebasestorage.app",
-    "messagingSenderId": "403405000720",
-    "appId": "1:403405000720:web:483e8e0b01be253a88ba95"
+    configure according to user database
 }
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
