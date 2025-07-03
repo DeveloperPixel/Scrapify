@@ -19,8 +19,8 @@ def send_email(url, title, price, message):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
     sender_email = 'scrapify.shopBuddy@gmail.com'
-    sender_password = 'uzzd hafu xley wgne'
-    recipient_email = "keshavprajapati357@gmail.com"
+    sender_password = 'sender password'
+    recipient_email = "recipient mail"
 
     if smtp_server and smtp_port and sender_email and sender_password and recipient_email:
         server = smtplib.SMTP(smtp_server, smtp_port)
