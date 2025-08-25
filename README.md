@@ -55,7 +55,7 @@ This project is designed to **save users time and money** by automatically monit
 ```bash
 git clone https://github.com/your-username/scrapify.git
 cd scrapify
-
+```
 ## 📂 Project Structure
 
 ```
